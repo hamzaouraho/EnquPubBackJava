@@ -1,6 +1,12 @@
 package org.sid.enquete.web;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.transaction.Transactional;
 
 import org.sid.enquete.dao.EtudeRepository;
 import org.sid.enquete.dao.RequeteRepository;
@@ -16,7 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @RestController
+@Transactional
 public class EnqueteController {
 	@Autowired
 	private EtudeRepository etudeRepository;
@@ -39,7 +50,7 @@ public class EnqueteController {
 	}
 	@CrossOrigin(origins = "http://localhost:3000/")
 	@GetMapping("/situations/{id}")
-	public List<Requete> situationsById(@PathVariable (name="id") Long id){
+	public List<Requete> situationsById(@PathVariable (name="id") int id){
 		return requeteRepository.situationsById(id);
 	}
 	@CrossOrigin(origins = "http://localhost:3000/")
@@ -49,14 +60,13 @@ public class EnqueteController {
 	}
 	@CrossOrigin(origins = "http://localhost:3000/")
 	@PostMapping(value = "/createRequete")
-	public Requete createUser(@RequestBody Requete requete) {
-		System.out.println(requete);
+	public Requete createRequete(@RequestBody Requete requete) {
 		requeteRepository.save(requete);
 		return requete;
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping(value = "/createEtude")
-	public Etude createUser(@RequestBody Etude etude) {
+	public Etude createEtude(@RequestBody Etude etude) {
 		System.out.println(etude);
 		etudeRepository.save(etude);
 		return etude;

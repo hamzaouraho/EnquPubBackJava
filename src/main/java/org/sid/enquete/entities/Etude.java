@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -21,6 +23,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name="Etude")
 @Data @AllArgsConstructor @NoArgsConstructor 
 public class Etude implements Serializable{
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -38,8 +41,7 @@ public class Etude implements Serializable{
 	private String pictureUrl;
 	@Column(columnDefinition = "longtext")
 	private String perimetre; 
-	@OneToMany(mappedBy = "etude")
-	@JsonProperty(access = Access.WRITE_ONLY)
-	private Collection<Requete> requetes; 
+	//@OneToMany(mappedBy="etude")  
+	//private Collection<Requete> requetes; 
 
 }

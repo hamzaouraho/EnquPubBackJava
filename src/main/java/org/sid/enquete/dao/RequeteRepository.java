@@ -11,8 +11,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface RequeteRepository extends JpaRepository<Requete, Long> {
 
-	@Query(value = "select e from Requete e where id = :x")
-	public List<Requete> situationsById(@Param("x")Long mc);
+	@Query(value = "select e from Requete e where etude_id = :x")
+	public List<Requete> situationsById(@Param("x")int mc);
 	
 	@Query(value = "select e from Requete e")
 	public List<Requete> situations();
